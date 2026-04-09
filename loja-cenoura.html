@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja da Cenoura - Cenouras Frescas Direto da Horta</title>
+    <meta name="description" content="Cenouras frescas, selecionadas e de qualidade. Entrega rápida para sua casa ou negócio. Compre agora!">
+    
+    <!-- Bootstrap 5.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for Branding */
+        :root {
+            --primary-orange: #ff8c00;
+            --primary-orange-dark: #e67e00;
+            --leaf-green: #2d5016;
+            --leaf-green-light: #4a7c2e;
+            --cream: #faf6f1;
+            --soil-brown: #8b6f47;
+            --text-dark: #2c2c2c;
+            --text-light: #666;
+            --border-light: #e8e8e8;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--leaf-green);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Header / Navigation */
+        .site-header {
+            background: linear-gradient(135deg, var(--leaf-green) 0%, var(--leaf-green-light) 100%);
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand::before {
+            content: "🥕";
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--cream) !important;
+        }
+
+        .btn-header-cta {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-header-cta:hover {
+            background-color: var(--primary-orange-dark);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cream) 0%, rgba(255, 140, 0, 0.05) 100%);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            color: var(--leaf-green);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary-cta {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary-cta:hover {
+            background-color: var(--primary-orange-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .btn-secondary-cta {
+            background-color: transparent;
+            color: var(--leaf-green);
+            border: 2px solid var(--leaf-green);
+            padding: 0.6rem 1.8rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary-cta:hover {
+            background-color: var(--leaf-green);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 4rem 0;
+        }
+
+        section.light-bg {
+            background-color: var(--cream);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background-color: white;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background: white;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-orange);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            color: var(--leaf-green);
+            margin-bottom: 0.8rem;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+        }
+
+        /* Products Section */
+        .products {
+            background-color: var(--cream);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: var(--border-light);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--leaf-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .product-unit {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .btn-add-cart {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--primary-orange-dark);
+            transform: scale(1.02);
+        }
+
+        .btn-add-cart:active {
+            transform: scale(0.98);
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .about-highlight {
+            background-color: var(--cream);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-orange);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--cream);
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--leaf-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-rating {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background-color: white;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: var(--cream);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--leaf-green);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(255, 140, 0, 0.05);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            color: var(--primary-orange);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-light);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--leaf-green) 0%, var(--leaf-green-light) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta-white {
+            background-color: white;
+            color: var(--leaf-green);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-cta-white:hover {
+            background-color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: var(--leaf-green);
+        }
+
+        /* Contact Form Section */
+        .contact-section {
+            background-color: var(--cream);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--leaf-green);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+            outline: none;
+        }
+
+        .form-control textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .form-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: linear-gradient(135deg, var(--leaf-green) 0%, var(--leaf-green-light) 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--cream);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--cream);
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Cart Counter */
+        .cart-counter {
+            background-color: var(--primary-orange);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        /* SVG Decorations */
+        .svg-divider {
+            width: 100%;
+            height: 80px;
+            background: white;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary-cta,
+            .btn-secondary-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-cta-white {
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .toast-notification {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+
+            section {
+                padding: 2.5rem 0;
+            }
+        }
+
+        /* Accessibility */
+        .btn-primary-cta:focus,
+        .btn-secondary-cta:focus,
+        .btn-add-cart:focus,
+        .btn-submit:focus,
+        .btn-header-cta:focus,
+        .btn-cta-white:focus {
+            outline: 2px solid var(--primary-orange);
+            outline-offset: 2px;
+        }
+
+        .faq-question:focus {
+            outline: 2px solid var(--primary-orange);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#inicio">Loja da Cenoura</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto" id="navMenu">
+                        <!-- Navigation items will be rendered here -->
+                    </ul>
+                    <div class="d-flex align-items-center ms-3">
+                        <button class="btn btn-header-cta" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            Carrinho
+                            <span class="cart-counter" id="cartCounter">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 hero-content">
+                        <h1 id="heroTitle">Cenouras frescas direto da horta para sua mesa</h1>
+                        <p class="hero-subtitle" id="heroSubtitle">Qualidade, sabor e entrega rápida</p>
+                        <div class="hero-buttons">
+                            <a href="#produtos" class="btn-primary-cta">Comprar agora</a>
+                            <a href="#contato" class="btn-secondary-cta">Falar no WhatsApp</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 hero-image">
+                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/aiEabYMMNoROAESW.jpg" alt="Cenouras frescas colhidas" loading="lazy">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo demonstrativo de cenouras frescas" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits light-bg" id="beneficios">
+            <div class="container">
+                <h2 class="text-center mb-5">Por que escolher a Loja da Cenoura?</h2>
+                <div class="row" id="benefitsContainer">
+                    <!-- Benefits will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products" id="produtos">
+            <div class="container">
+                <h2 class="text-center mb-5">Nossos Produtos</h2>
+                <div class="row" id="productsContainer">
+                    <!-- Products will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about light-bg" id="sobre">
+            <div class="container">
+                <h2 class="text-center mb-5">Sobre Nós</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/gASNAYpMPRzHVMXL.jpg" alt="Fazenda de cenouras" loading="lazy">
+                    </div>
+                    <div class="about-text">
+                        <p id="aboutText1">Somos uma empresa familiar dedicada ao cultivo e venda de cenouras frescas de alta qualidade. Com mais de 20 anos de experiência, conhecemos cada detalhe do processo de produção.</p>
+                        <div class="about-highlight" id="aboutHighlight">
+                            "Frescor de verdade, direto para você."
+                        </div>
+                        <p id="aboutText2">Selecionamos cenouras frescas, nutritivas e saborosas para sua casa ou negócio. Atendemos desde consumidores domésticos até restaurantes e mercados locais.</p>
+                        <p id="aboutText3">Nosso compromisso é garantir que cada cenoura chegue até você com a máxima qualidade e frescor, colhidas no dia ou no dia anterior à entrega.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="depoimentos">
+            <div class="container">
+                <h2 class="text-center mb-5">O que nossos clientes dizem</h2>
+                <div class="row" id="testimonialsContainer">
+                    <!-- Testimonials will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="text-center mb-5">Perguntas Frequentes</h2>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto" id="faqContainer">
+                        <!-- FAQ items will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="cta">
+            <div class="container">
+                <h2 id="ctaTitle">Pronto para receber cenouras frescas na sua porta?</h2>
+                <p id="ctaText">Faça seu pedido agora e aproveite nossas ofertas especiais!</p>
+                <div class="cta-buttons">
+                    <a href="#produtos" class="btn-cta-white">Ver Ofertas</a>
+                    <a href="#contato" class="btn-cta-white">Entrar em Contato</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-section" id="contato">
+            <div class="container">
+                <h2 class="text-center mb-5">Entre em Contato</h2>
+                <form class="contact-form" id="contactForm">
+                    <div id="formMessage" class="form-message"></div>
+                    
+                    <div class="form-group">
+                        <label for="contactName" class="form-label">Nome *</label>
+                        <input type="text" class="form-control" id="contactName" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="contactEmail" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactPhone" class="form-label">Telefone / WhatsApp *</label>
+                        <input type="tel" class="form-control" id="contactPhone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactType" class="form-label">Tipo de Cliente</label>
+                        <select class="form-control" id="contactType" name="type">
+                            <option value="">Selecione...</option>
+                            <option value="residencial">Consumidor Residencial</option>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="mercado">Mercado / Supermercado</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage" class="form-label">Mensagem</label>
+                        <textarea class="form-control" id="contactMessage" name="message" placeholder="Conte-nos mais sobre seu interesse..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🥕 Loja da Cenoura</h4>
+                    <p>Cenouras frescas, selecionadas e de qualidade. Entrega rápida para sua casa ou negócio.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <a href="#inicio">Início</a>
+                    <a href="#produtos">Produtos</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p id="footerPhone">📞 (11) 9999-9999</p>
+                    <p id="footerEmail">📧 contato@lojacenoura.com.br</p>
+                    <p id="footerHours">🕐 Seg-Sex: 8h-18h</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Endereço</h4>
+                    <p id="footerAddress">Rua da Horta, 123<br>São Paulo, SP<br>Brasil</p>
+                </div>
+            </div>
+            <div class="footer-divider">
+                <p>&copy; 2024 Loja da Cenoura. Todos os direitos reservados. | Política de Privacidade</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Seu Carrinho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cartItems">
+                    <p class="text-center text-muted">Seu carrinho está vazio</p>
+                </div>
+                <div class="modal-footer">
+                    <p class="me-auto"><strong>Total: R$ <span id="cartTotal">0.00</span></strong></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" style="background-color: var(--primary-orange); border-color: var(--primary-orange);">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Embedded JSON Content -->
+    <script type="application/json" id="siteContent">
+    {
+      "brand": {
+        "name": "Loja da Cenoura",
+        "tagline": "Frescor de verdade, direto para você.",
+        "description": "Cenouras frescas, selecionadas e de qualidade. Entrega rápida para sua casa ou negócio."
+      },
+      "navigation": [
+        { "label": "Início", "href": "#inicio" },
+        { "label": "Benefícios", "href": "#beneficios" },
+        { "label": "Produtos", "href": "#produtos" },
+        { "label": "Sobre", "href": "#sobre" },
+        { "label": "Depoimentos", "href": "#depoimentos" },
+        { "label": "FAQ", "href": "#faq" },
+        { "label": "Contato", "href": "#contato" }
+      ],
+      "hero": {
+        "title": "Cenouras frescas direto da horta para sua mesa",
+        "subtitle": "Qualidade, sabor e entrega rápida",
+        "primaryCta": "Comprar agora",
+        "secondaryCta": "Falar no WhatsApp"
+      },
+      "benefits": [
+        {
+          "icon": "🌱",
+          "title": "Colheita Fresca",
+          "description": "Colhidas no dia anterior ou no mesmo dia da entrega para máxima frescura."
+        },
+        {
+          "icon": "⚡",
+          "title": "Entrega Rápida",
+          "description": "Receba seus pedidos em até 24 horas na região de São Paulo."
+        },
+        {
+          "icon": "✓",
+          "title": "Origem Selecionada",
+          "description": "Apenas cenouras de qualidade premium, selecionadas com cuidado."
+        },
+        {
+          "icon": "💰",
+          "title": "Preço Justo",
+          "description": "Melhor relação custo-benefício do mercado, direto do produtor."
+        },
+        {
+          "icon": "❤️",
+          "title": "Alimentos Saudáveis",
+          "description": "Ricas em vitamina A, fibras e nutrientes essenciais para sua saúde."
+        },
+        {
+          "icon": "🌾",
+          "title": "Produção com Cuidado",
+          "description": "Cultivadas com técnicas sustentáveis e respeito ao meio ambiente."
+        }
+      ],
+      "products": [
+        {
+          "id": 1,
+          "name": "Cenoura Comum 1kg",
+          "description": "Cenoura fresca e saborosa, ideal para consumo doméstico.",
+          "price": 4.99,
+          "unit": "1 kg",
+          "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/UxkEgypwhYLsfnVQ.jpg",
+          "badge": null
+        },
+        {
+          "id": 2,
+          "name": "Cenoura Orgânica 1kg",
+          "description": "Cenoura 100% orgânica, cultivada sem agrotóxicos.",
+          "price": 7.99,
+          "unit": "1 kg",
+          "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/vCEinKdQJupsDmhy.jpg",
+          "badge": "Orgânica"
+        },
+        {
+          "id": 3,
+          "name": "Combo Família 5kg",
+          "description": "Perfeito para famílias. 5kg de cenoura fresca selecionada.",
+          "price": 19.99,
+          "unit": "5 kg",
+          "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/HvxRDgaxsRKdvvAT.jpg",
+          "badge": "Promoção"
+        },
+        {
+          "id": 4,
+          "name": "Caixa para Restaurantes 10kg",
+          "description": "Ideal para restaurantes, mercados e negócios. Entrega em caixa.",
+          "price": 34.99,
+          "unit": "10 kg",
+          "image": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663028574378/UqtZrVaWKylvRUcy.jpg",
+          "badge": "Atacado"
+        }
+      ],
+      "about": {
+        "text1": "Somos uma empresa familiar dedicada ao cultivo e venda de cenouras frescas de alta qualidade. Com mais de 20 anos de experiência, conhecemos cada detalhe do processo de produção.",
+        "highlight": "Frescor de verdade, direto para você.",
+        "text2": "Selecionamos cenouras frescas, nutritivas e saborosas para sua casa ou negócio. Atendemos desde consumidores domésticos até restaurantes e mercados locais.",
+        "text3": "Nosso compromisso é garantir que cada cenoura chegue até você com a máxima qualidade e frescor, colhidas no dia ou no dia anterior à entrega."
+      },
+      "testimonials": [
+        {
+          "name": "Maria Silva",
+          "role": "Consumidora Residencial",
+          "text": "As cenouras são sempre frescas e saborosas! Já sou cliente há 2 anos e recomendo para todos os meus amigos.",
+          "rating": "⭐⭐⭐⭐⭐"
+        },
+        {
+          "name": "João Santos",
+          "role": "Dono de Restaurante",
+          "text": "Fornecedor confiável! Cenouras de excelente qualidade e entrega pontual. Essencial para meu restaurante.",
+          "rating": "⭐⭐⭐⭐⭐"
+        },
+        {
+          "name": "Ana Costa",
+          "role": "Pequeno Mercado",
+          "text": "Ótimo preço no atacado e qualidade garantida. Meus clientes sempre elogiam as cenouras que vendo.",
+          "rating": "⭐⭐⭐⭐⭐"
+        }
+      ],
+      "faq": [
+        {
+          "question": "As cenouras são entregues no mesmo dia?",
+          "answer": "Pedidos realizados até as 14h são entregues no dia seguinte. Para a região de São Paulo, oferecemos entrega expressa em até 24 horas."
+        },
+        {
+          "question": "Vocês vendem no atacado?",
+          "answer": "Sim! Temos preços especiais para restaurantes, mercados e negócios. Consulte nossa caixa de 10kg ou entre em contato para orçamentos personalizados."
+        },
+        {
+          "question": "Há pedido mínimo?",
+          "answer": "Não há pedido mínimo para compras no varejo. Para atacado, o mínimo é de 5kg."
+        },
+        {
+          "question": "As cenouras são orgânicas?",
+          "answer": "Oferecemos tanto cenouras convencionais quanto orgânicas certificadas. Escolha a opção que melhor se adequa às suas necessidades."
+        },
+        {
+          "question": "Como faço o pedido?",
+          "answer": "Você pode fazer seu pedido através do nosso site, por WhatsApp ou entrando em contato por telefone. Aceitamos pagamento via transferência, PIX ou dinheiro na entrega."
+        },
+        {
+          "question": "Qual é a forma de pagamento?",
+          "answer": "Aceitamos PIX, transferência bancária, dinheiro na entrega e cartão de crédito. Escolha a forma mais conveniente para você."
+        }
+      ],
+      "cta": {
+        "title": "Pronto para receber cenouras frescas na sua porta?",
+        "text": "Faça seu pedido agora e aproveite nossas ofertas especiais!"
+      },
+      "footer": {
+        "phone": "📞 (11) 9999-9999",
+        "email": "📧 contato@lojacenoura.com.br",
+        "hours": "🕐 Seg-Sex: 8h-18h",
+        "address": "Rua da Horta, 123\nSão Paulo, SP\nBrasil"
+      }
+    }
+    </script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // ============================================
+        // CONTENT MANAGEMENT
+        // ============================================
+
+        // Get embedded JSON content
+        function getEmbeddedContent() {
+            const contentScript = document.getElementById('siteContent');
+            return JSON.parse(contentScript.textContent);
+        }
+
+        const siteContent = getEmbeddedContent();
+
+        // ============================================
+        // RENDERING FUNCTIONS
+        // ============================================
+
+        // Render Navigation
+        function renderNavigation() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.innerHTML = siteContent.navigation.map(item => 
+                `<li class="nav-item">
+                    <a class="nav-link" href="${item.href}">${item.label}</a>
+                </li>`
+            ).join('');
+        }
+
+        // Render Benefits
+        function renderBenefits() {
+            const container = document.getElementById('benefitsContainer');
+            container.innerHTML = siteContent.benefits.map(benefit => 
+                `<div class="col-md-6 col-lg-4 mb-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">${benefit.icon}</div>
+                        <h3>${benefit.title}</h3>
+                        <p>${benefit.description}</p>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // Render Products
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = siteContent.products.map(product => 
+                `<div class="col-md-6 col-lg-3 mb-4">
+                    <div class="product-card">
+                        <div style="position: relative;">
+                            <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                            ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-description">${product.description}</div>
+                            <div class="product-unit">Peso: ${product.unit}</div>
+                            <div class="product-price">R$ ${product.price.toFixed(2)}</div>
+                            <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // Render Testimonials
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialsContainer');
+            container.innerHTML = siteContent.testimonials.map(testimonial => 
+                `<div class="col-md-6 col-lg-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">${testimonial.rating}</div>
+                        <p class="testimonial-text">"${testimonial.text}"</p>
+                        <div class="testimonial-author">${testimonial.name}</div>
+                        <div class="testimonial-role">${testimonial.role}</div>
+                    </div>
+                </div>`
+            ).join('');
+        }
+
+        // Render FAQ
+        function renderFaq() {
+            const container = document.getElementById('faqContainer');
+            container.innerHTML = siteContent.faq.map((item, index) => 
+                `<div class="faq-item" data-faq-index="${index}">
+                    <div class="faq-question" onclick="toggleFaq(${index})">
+                        <span>${item.question}</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">${item.answer}</div>
+                </div>`
+            ).join('');
+        }
+
+        // ============================================
+        // CART MANAGEMENT
+        // ============================================
+
+        let cart = [];
+
+        function addToCart(productId, productName, productPrice) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`${productName} adicionado ao carrinho!`);
+        }
+
+        function updateCartUI() {
+            const counter = document.getElementById('cartCounter');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            counter.textContent = totalItems;
+
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalSpan = document.getElementById('cartTotal');
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p class="text-center text-muted">Seu carrinho está vazio</p>';
+                cartTotalSpan.textContent = '0.00';
+            } else {
+                let total = 0;
+                cartItemsDiv.innerHTML = '<div class="list-group">' + cart.map(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    return `
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">${item.name}</div>
+                                    <small class="text-muted">R$ ${item.price.toFixed(2)} x ${item.quantity}</small>
+                                </div>
+                                <div>
+                                    <strong>R$ ${itemTotal.toFixed(2)}</strong>
+                                    <button class="btn btn-sm btn-danger ms-2" onclick="removeFromCart(${item.id})">
+                                        Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('') + '</div>';
+                cartTotalSpan.textContent = total.toFixed(2);
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        // ============================================
+        // INTERACTIONS
+        // ============================================
+
+        // Toggle FAQ Accordion
+        function toggleFaq(index) {
+            const faqItem = document.querySelector(`[data-faq-index="${index}"]`);
+            faqItem.classList.toggle('active');
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Smooth Scroll
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Contact Form Handling
+        function setupContactForm() {
+            const form = document.getElementById('contactForm');
+            const messageDiv = document.getElementById('formMessage');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('contactName').value.trim();
+                const phone = document.getElementById('contactPhone').value.trim();
+
+                if (!name || !phone) {
+                    messageDiv.className = 'form-message error';
+                    messageDiv.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+                    return;
+                }
+
+                // Simulate form submission
+                messageDiv.className = 'form-message success';
+                messageDiv.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+                form.reset();
+
+                setTimeout(() => {
+                    messageDiv.className = 'form-message';
+                }, 5000);
+            });
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderNavigation();
+            renderBenefits();
+            renderProducts();
+            renderTestimonials();
+            renderFaq();
+            setupSmoothScroll();
+            setupContactForm();
+            updateCartUI();
+
+            // Log that site is ready
+            console.log('Loja da Cenoura - Website loaded successfully!');
+        });
+    </script>
+</body>
+</html>
