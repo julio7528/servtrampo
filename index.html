@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romário — Jogo de Plataforma de Futebol</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="romario-app">
+
+    <!-- Accessibility: screen reader only instruction -->
+    <p id="sr-only" class="sr-only">Este jogo usa o teclado. Use as setas para mover, A para pular, S para chutar, D para deslizar.</p>
+
+    <!-- Accessibility: live region for state announcements -->
+    <div id="aria-live-region" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Game wrapper -->
+    <div id="game-wrapper">
+
+      <!-- Canvas -->
+      <canvas id="game-canvas" width="960" height="540">
+        Seu navegador não suporta Canvas.
+      </canvas>
+
+      <!-- Canvas fallback -->
+      <div id="canvas-fallback">
+        <p>Seu navegador não suporta HTML5 Canvas.</p>
+        <p>Por favor, use um navegador moderno como Chrome, Firefox ou Edge.</p>
+      </div>
+
+      <!-- Overlays -->
+      <div id="overlay-loading">Carregando...</div>
+      <div id="overlay-fatal-error"></div>
+      <div id="overlay-damage-flash"></div>
+
+      <!-- HUD -->
+      <div id="hud-container">
+        <div id="hud-hearts" class="hud-item">
+          <span class="hud-label">Vidas:</span>
+          <span class="hearts-display"></span>
+        </div>
+        <div id="hud-score" class="hud-item">
+          <span class="hud-label">Pontos:</span>
+          <span class="hud-value">0</span>
+        </div>
+        <div id="hud-coins" class="hud-item">
+          <span class="coin-icon"></span>
+          <span class="hud-value">0/30</span>
+        </div>
+        <div id="hud-continues" class="hud-item">
+          <span class="hud-label">Continues:</span>
+          <span class="hud-value">3</span>
+        </div>
+        <div id="hud-fireballs" class="hud-item">
+          <span class="fireball-icon"></span>
+          <span class="hud-value">0</span>
+        </div>
+        <div id="hud-difficulty" class="hud-item">
+          <span class="hud-label">Dificuldade:</span>
+          <span class="hud-value" id="difficulty-label">Médio</span>
+        </div>
+        <div id="hud-progress" class="hud-item">
+          <span class="hud-label">Progresso:</span>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone label -->
+      <div id="hud-zone-label"></div>
+
+      <!-- Boss health -->
+      <div id="hud-boss-health">
+        <div class="boss-label">Técnico Rival</div>
+        <div class="boss-health-track">
+          <div class="boss-health-fill" style="width:100%"></div>
+          <span class="boss-health-text">180 / 180</span>
+        </div>
+      </div>
+
+      <!-- Damage status toast -->
+      <div id="damage-status"></div>
+
+      <!-- Checkpoint notification -->
+      <div id="screen-checkpoint-notify" class="screen-overlay is-hidden">
+        <div id="checkpoint-message" class="checkpoint-msg">Checkpoint ativado!</div>
+      </div>
+
+      <!-- Boss introduction -->
+      <div id="screen-boss-intro" class="screen-overlay is-hidden">
+        <div id="boss-name-label">Técnico Rival</div>
+      </div>
+
+      <!-- Main Menu -->
+      <div id="screen-main-menu" class="screen-overlay is-active">
+        <div class="game-logo">ROMÁRIO</div>
+        <div class="game-tagline">Jogo de Plataforma de Futebol</div>
+        <div class="menu-buttons">
+          <button id="btn-start" class="btn" aria-label="Iniciar jogo">Iniciar</button>
+          <button id="btn-controls" class="btn" aria-label="Ver controles">Controles</button>
+          <button id="btn-difficulty" class="btn" aria-label="Selecionar dificuldade">Dificuldade</button>
+          <button id="btn-audio" class="btn" aria-label="Configurações de áudio">Áudio</button>
+          <button id="btn-credits" class="btn" aria-label="Créditos">Créditos</button>
+        </div>
+        <div class="keyboard-hint">
+          <kbd>Esc</kbd> / <kbd>P</kbd> para pausar durante o jogo
+        </div>
+      </div>
+
+      <!-- Controls Screen -->
+      <div id="screen-controls" class="screen-overlay is-hidden">
+        <h2 class="screen-title">Controles</h2>
+        <div class="controls-table">
+          <div class="ctrl-row">
+            <span class="ctrl-key">&larr; &rarr;</span>
+            <span class="ctrl-action">Mover esquerda / direita</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">&darr;</span>
+            <span class="ctrl-action">Agachar</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">A</span>
+            <span class="ctrl-action">Pular (duplo no ar)</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">S</span>
+            <span class="ctrl-action">Chutar bola</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">D</span>
+            <span class="ctrl-action">Deslizar</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">&uarr;</span>
+            <span class="ctrl-action">Balãozinho</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key combo">&uarr; + S</span>
+            <span class="ctrl-action">Chute alto</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key combo">&darr; + S</span>
+            <span class="ctrl-action">Chute rasteiro</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key combo">A + S (no ar)</span>
+            <span class="ctrl-action">Bicicleta</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">P</span>
+            <span class="ctrl-action">Pausar</span>
+          </div>
+          <div class="ctrl-row">
+            <span class="ctrl-key">Esc</span>
+            <span class="ctrl-action">Voltar / Pausar</span>
+          </div>
+        </div>
+        <p class="controls-note">
+          Combine teclas simultaneamente para ataques especiais. O chute rasteiro quica no chão.
+          O chute alto faz um arco. A bicicleta causa dano em área.
+        </p>
+        <button id="btn-back-controls" class="btn" aria-label="Voltar ao menu">Voltar</button>
+      </div>
+
+      <!-- Difficulty Screen -->
+      <div id="screen-difficulty" class="screen-overlay is-hidden">
+        <h2 class="screen-title">Dificuldade</h2>
+        <div class="difficulty-group">
+          <button id="btn-easy" class="btn" aria-label="Dificuldade fácil">Fácil</button>
+          <span class="diff-desc">Inimigos mais lentos, mais tempo de invencibilidade, menos dano.</span>
+          <button id="btn-medium" class="btn is-selected" aria-label="Dificuldade média">Médio</button>
+          <span class="diff-desc">Experiência balanceada para a maioria dos jogadores.</span>
+          <button id="btn-hard" class="btn" aria-label="Dificuldade difícil">Difícil</button>
+          <span class="diff-desc">Inimigos rápidos, chefe agressivo, menos tempo de invencibilidade.</span>
+        </div>
+        <button id="btn-back-difficulty" class="btn" aria-label="Voltar ao menu">Voltar</button>
+      </div>
+
+      <!-- Audio Settings -->
+      <div id="screen-audio" class="screen-overlay is-hidden">
+        <h2 class="screen-title">Áudio</h2>
+        <div class="audio-group">
+          <div class="volume-row">
+            <label for="volume-slider">Volume</label>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Volume do som">
+          </div>
+          <button id="btn-mute" class="btn is-small" aria-label="Ativar ou desativar som">
+            Mutar
+          </button>
+          <span class="audio-status">Volume: 50%</span>
+        </div>
+        <p class="controls-note">
+          A música e os efeitos sonoros são gerados proceduralmente pelo navegador.
+          O jogo funciona completamente sem áudio.
+        </p>
+        <button id="btn-back-audio" class="btn" aria-label="Voltar ao menu">Voltar</button>
+      </div>
+
+      <!-- Credits -->
+      <div id="screen-credits" class="screen-overlay is-hidden">
+        <h2 class="screen-title">Créditos</h2>
+        <div class="credits-text">
+          <p><strong>Romário</strong></p>
+          <p>Jogo de plataforma de futebol original</p>
+          <p>Todos os gráficos são gerados proceduralmente via Canvas.</p>
+          <p>Todos os sons são gerados via Web Audio API.</p>
+          <p>Nenhum recurso externo é utilizado.</p>
+          <br>
+          <p>Desenvolvido como protótipo de alta qualidade.</p>
+          <p>Este jogo não reproduz nenhum personagem, time, liga, competição ou marca real.</p>
+          <p>Todos os elementos visuais e sonoros são originais e fictícios.</p>
+        </div>
+        <button id="btn-back-credits" class="btn" aria-label="Voltar ao menu">Voltar</button>
+      </div>
+
+      <!-- Pause Screen -->
+      <div id="screen-pause" class="screen-overlay is-hidden">
+        <div class="pause-title">Pausado</div>
+        <div class="menu-buttons">
+          <button id="btn-resume" class="btn" aria-label="Continuar jogo">Continuar</button>
+          <button id="btn-menu-from-pause" class="btn is-danger" aria-label="Voltar ao menu principal">Menu Principal</button>
+        </div>
+      </div>
+
+      <!-- Game Over Screen -->
+      <div id="screen-gameover" class="screen-overlay is-hidden">
+        <div class="gameover-title">Fim de Jogo</div>
+        <p id="gameover-message">Você perdeu todas as vidas.</p>
+        <p id="gameover-continues-left">Continues restantes: 0</p>
+        <button id="btn-menu-from-gameover" class="btn" aria-label="Voltar ao menu principal">Menu Principal</button>
+      </div>
+
+      <!-- Victory Screen -->
+      <div id="screen-victory" class="screen-overlay is-hidden">
+        <div class="victory-title">Vitória!</div>
+        <p class="screen-subtitle">Campeão do Campeonato Mundial!</p>
+        <div id="victory-stats"></div>
+        <div class="menu-buttons">
+          <button id="btn-replay" class="btn is-success" aria-label="Jogar novamente">Jogar Novamente</button>
+          <button id="btn-menu-from-victory" class="btn" aria-label="Voltar ao menu principal">Menu Principal</button>
+        </div>
+      </div>
+
+      <!-- Debug panel (hidden by default) -->
+      <div id="debug-panel"></div>
+
+    </div><!-- /game-wrapper -->
+  </div><!-- /romario-app -->
+
+  <script src="script.js" defer></script>
+</body>
+</html>
