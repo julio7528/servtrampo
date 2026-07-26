@@ -216,12 +216,15 @@
         <button id="btn-back-credits" class="btn" aria-label="Voltar ao menu">Voltar</button>
       </div>
 
+      <!-- Pause button (visible during gameplay) -->
+      <button id="btn-pause" class="btn is-small"  aria-label="Pausar jogo">Pausar</button>
+
       <!-- Pause Screen -->
       <div id="screen-pause" class="screen-overlay is-hidden">
         <div class="pause-title">Pausado</div>
         <div class="menu-buttons">
           <button id="btn-resume" class="btn" aria-label="Continuar jogo">Continuar</button>
-          <button id="btn-menu-from-pause" class="btn is-danger" aria-label="Voltar ao menu principal">Menu Principal</button>
+          <button id="btn-back-menu" class="btn is-danger" aria-label="Voltar ao menu principal">Menu Principal</button>
         </div>
       </div>
 
@@ -230,6 +233,7 @@
         <div class="gameover-title">Fim de Jogo</div>
         <p id="gameover-message">Você perdeu todas as vidas.</p>
         <p id="gameover-continues-left">Continues restantes: 0</p>
+        <button id="btn-retry" class="btn is-success" aria-label="Tentar novamente">Tentar Novamente</button>
         <button id="btn-menu-from-gameover" class="btn" aria-label="Voltar ao menu principal">Menu Principal</button>
       </div>
 
